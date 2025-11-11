@@ -1,0 +1,48 @@
+div.blog-error {
+    display: flex;
+    flex-direction: column;
+    gap: 20pt;
+
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    text-align: center;
+
+    animation-name: animFadeIn;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+
+    & * {
+        margin: 0;
+        line-height: 1;
+    }
+
+    & h1 {
+        font-size: 2.0em
+    }
+
+    & h3 {
+        font-size: 1.22em;
+    }
+
+    & a {
+        color: var(--accent-2);
+        background-color: color-mix(in srgb, var(--accent-2), var(--background) 80%);
+        border-radius: 6pt;
+        border: 1px solid var(--accent-2);
+        padding: 6pt 18pt;
+        text-decoration: none;
+
+        width: fit-content;
+        margin-inline: auto;
+        transition: color, background-color, border-color, transform;
+        transition-duration: 150ms;
+    }
+
+    & a:hover {
+        color: var(--accent-1);
+        background-color: color-mix(in srgb, var(--accent-1), var(--background) 70%);
+        border-color: var(--accent-1);
+        transform: scale(1.05);
+    }
+}

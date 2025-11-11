@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
 import { LayoutPublic } from "../layouts/LayoutPublic"
+import { BlogPage } from "../pages/public/Blog/BlogPage.jsx"
 import { BlogCatalogPage } from "../pages/public/BlogCatalog/BlogCatalog"
-import { Blog } from "../pages/public/Blog/Blog.jsx"
 import { ProductCatalog } from "../pages/public/ProductCatalog/ProductCatalog.jsx"
 import { Product } from "../pages/public/Product/Product.jsx"
 import { LoginPage } from "../pages/public/Login/Login"
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'blogs/:blogId',
-        element: <Blog />
+        element: <BlogPage />
       },
       {
         path: 'productos',

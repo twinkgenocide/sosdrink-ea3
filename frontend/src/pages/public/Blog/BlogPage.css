@@ -1,0 +1,8 @@
+div.blog-container {
+    display: flex;
+    width: 100%;
+    max-width: 80vw;
+    margin-inline: auto;
+    margin-block: 20pt;
+    overflow: hidden;
+}
