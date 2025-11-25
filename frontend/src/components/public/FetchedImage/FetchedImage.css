@@ -1,0 +1,40 @@
+figure.fetched-img {
+    width: 170pt;
+    height: 170pt;
+    border-radius: 5pt;
+    overflow: hidden;
+
+    padding: 0;
+    margin: 5pt;
+
+    & img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        animation-name: animFadeIn;
+        animation-duration: 1s;
+        animation-iteration-count: 1;
+    }
+}
+
+figure.fetched-img div.error {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #202020;
+
+    animation-name: animFadeIn;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+
+    &::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
+        content: '⚠';
+        font-size: 100pt;
+        color: crimson;
+    }
+}
