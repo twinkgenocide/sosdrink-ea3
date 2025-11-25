@@ -1,7 +1,7 @@
-import {render, screen} from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
-import Navbar from './Navbar'
+import { Navbar } from './Navbar.jsx'
 import { expect } from 'vitest'
 
 describe('Navbar', () => {
@@ -13,21 +13,16 @@ describe('Navbar', () => {
             </MemoryRouter>
         )
 
-        const brand = screen.getByRole('link', { name: /sosdrink-ea3/i } )
+        const brand = screen.getByRole('link', { name: /inicio/i })
         expect(brand).toBeInTheDocument()
         expect(brand).toHaveAttribute('href', '/')
 
-        expect(screen.getByRole('link', { name: /home/i })).toHaveAttribute('href', '/')
-        expect(screen.getByRole('link', { name: /blogs/i })).toHaveAttribute('href', '/blogs')
         expect(screen.getByRole('link', { name: /productos/i })).toHaveAttribute('href', '/productos')
-
-        const toggler = screen.getByRole('button')
-        expect(toggler).toHaveAttribute('data-bs-toggle', 'collapse')
-        expect(toggler).toHaveAttribute('data-bs-target', '#menuNav')
+        expect(screen.getByRole('link', { name: /blogs/i })).toHaveAttribute('href', '/blogs')
 
     })
 
-    it ('navega a las rutas correctas al hacer click en los links', async () => {
+    it('navega a las rutas correctas al hacer click en los links', async () => {
         const user = userEvent.setup()
 
         render(
@@ -35,8 +30,8 @@ describe('Navbar', () => {
                 <Navbar />
                 <Routes>
                     <Route path='/' element={<h1>Home</h1>} />
-                    <Route path='/blog' element={<h1>Blogs</h1>} />
-                    <Route path='/producto' element={<h1>Productos</h1>} />
+                    <Route path='/blogs' element={<h1>Blogs</h1>} />
+                    <Route path='/productos' element={<h1>Productos</h1>} />
                 </Routes>
             </MemoryRouter>
         )

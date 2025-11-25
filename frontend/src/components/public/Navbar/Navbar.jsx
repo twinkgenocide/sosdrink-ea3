@@ -5,16 +5,16 @@ export function Navbar() {
     return <>
         <nav className="navbar">
             <div>
-                <Link className="sosdrink-logo" to="/">
+                <Link className="sosdrink-logo" to="/" aria-label="Inicio">
                     <p>SOSDRINK</p>
                 </Link>
                 <hr />
                 <ul className="navbar-links">
-                    <li><Link to="/productos">Productos</Link></li>
-                    <li><Link to="/blogs">Blogs</Link></li>
-                    <li><Link to="/nosotros">Nosotros</Link></li>
-                    <li><Link to="/contacto">Contacto</Link></li>
-                    <li><Link to="/login">Ingresa</Link></li>
+                    <li><Link to="/productos" aria-label="Productos">Productos</Link></li>
+                    <li><Link to="/blogs" aria-label="Blogs">Blogs</Link></li>
+                    <li><Link to="/nosotros" aria-label="Nosotros">Nosotros</Link></li>
+                    <li><Link to="/contacto" aria-label="Contacto">Contacto</Link></li>
+                    <li><Link to="/login" aria-label="Login">Ingresa</Link></li>
                 </ul>
                 <hr />
             </div>
