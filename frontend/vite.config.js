@@ -8,5 +8,18 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     allowedHosts: true
+  },
+
+  test: {
+    environment: 'jsdom',
+    setupFiles: './src/test/setupTests.js',
+    globals: true,
+    coverage: {
+      reporter: ['text', 'html'],
+      reportsDirectory: './coverage/'
+    }
+
   }
 })
+
+
