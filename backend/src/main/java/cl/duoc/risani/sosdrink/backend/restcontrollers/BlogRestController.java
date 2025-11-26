@@ -1,7 +1,9 @@
 package cl.duoc.risani.sosdrink.backend.restcontrollers;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +18,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import cl.duoc.risani.sosdrink.backend.entities.Blog;
+import cl.duoc.risani.sosdrink.backend.dto.BlogDTO;
+import cl.duoc.risani.sosdrink.backend.dto.BlogMapper;
 import cl.duoc.risani.sosdrink.backend.entities.CategoriaBlog;
 import cl.duoc.risani.sosdrink.backend.services.BlogServices;
 
@@ -29,70 +34,73 @@ public class BlogRestController {
     @Autowired
     private BlogServices blogServices;
 
+    private BlogMapper blogMapper = new BlogMapper();
+
     // Blogs
 
     @PostMapping
-    public ResponseEntity<Blog> crearBlog(@RequestBody Blog blog) {
-        Optional<CategoriaBlog> categoriaBlog = blogServices.obtenerCategoriaBlog(blog.getCategoriaBlog().getId());
-        if (!categoriaBlog.isPresent()) {
-            return ResponseEntity.badRequest().build();
-        }
-        blog.setCategoriaBlog(categoriaBlog.get());
-        Blog nuevoBlog = blogServices.guardarBlog(blog);
-        return ResponseEntity.status(HttpStatus.CREATED).body(nuevoBlog);
+    public ResponseEntity<BlogDTO> crearBlog(@RequestBody BlogDTO blogDto) {
+        Optional<CategoriaBlog> catOptional = blogServices.obtenerCategoriaBlog(blogDto.getCategoriaBlogId());
+        CategoriaBlog cat = catOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        Blog blog = blogMapper.fromDTO(blogDto);
+        blog.setFecha(LocalDateTime.now());
+        blog.setCategoriaBlog(cat);
+        
+        Blog blogGuardado = blogServices.guardarBlog(blog);
+        BlogDTO responseDto = blogMapper.toDTO(blogGuardado);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     @GetMapping
-    public ResponseEntity<List<Blog>> listarBlogs(@RequestParam(required = false) Long categoria) {
+    public ResponseEntity<List<BlogDTO>> listarBlogs(@RequestParam(required = false) Long categoria) {
         List<Blog> blogs;
         if (categoria != null) {
-            Optional<CategoriaBlog> categoriaBlog = blogServices.obtenerCategoriaBlog(categoria);
-            if (!categoriaBlog.isPresent()) {
-                return ResponseEntity.notFound().build();
-            }
-            blogs = categoriaBlog.get().getBlogs();
+            Optional<CategoriaBlog> catOptional = blogServices.obtenerCategoriaBlog(categoria);
+            CategoriaBlog cat = catOptional.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+            blogs = cat.getBlogs();
         } else {
             blogs = blogServices.listarBlogs();
         }
-        return ResponseEntity.ok(blogs);
+
+        List<BlogDTO> blogDTOs = blogs.stream().map(
+            blog -> blogMapper.toDTO(blog)
+        ).collect(Collectors.toList());
+
+        return ResponseEntity.ok(blogDTOs);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> obtenerBlog(@PathVariable Long id) {
-        Optional<Blog> blog = blogServices.obtenerBlog(id);
-        if (!blog.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(blog.get());
+        Blog blog = blogServices.obtenerBlog(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        BlogDTO blogDTO = blogMapper.toDTO(blog);
+        return ResponseEntity.ok(blogDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Blog> editarBlog(@PathVariable Long id, @RequestBody Blog blogEditado) {
-        Optional<Blog> blog = blogServices.obtenerBlog(id);
-        Optional<CategoriaBlog> categoriaBlog = blogServices
-                .obtenerCategoriaBlog(blogEditado.getCategoriaBlog().getId());
+    public ResponseEntity<BlogDTO> editarBlog(@PathVariable Long id, @RequestBody BlogDTO blogEditDTO) {
+        Blog blog = blogServices.obtenerBlog(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        CategoriaBlog categoriaBlog = blogServices
+            .obtenerCategoriaBlog(blogEditDTO.getCategoriaBlogId())
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        if (!blog.isPresent() || !categoriaBlog.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
+        blog.setTitulo(blogEditDTO.getTitulo());
+        blog.setResumen(blogEditDTO.getResumen());
+        blog.setImagenUrl(blogEditDTO.getImagenUrl());
+        blog.setContenido(blogEditDTO.getContenido());
+        blog.setCategoriaBlog(categoriaBlog);
 
-        Blog blogExistente = blog.get();
-        blogExistente.setTitulo(blogEditado.getTitulo());
-        blogExistente.setResumen(blogEditado.getResumen());
-        blogExistente.setContenido(blogEditado.getContenido());
-        blogExistente.setCategoriaBlog(categoriaBlog.get());
-
-        Blog guardado = blogServices.guardarBlog(blogExistente);
-        return ResponseEntity.ok(guardado);
+        Blog blogGuardado = blogServices.guardarBlog(blog);
+        return ResponseEntity.ok(blogMapper.toDTO(blogGuardado));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarBlog(@PathVariable Long id) {
-        Optional<Blog> blog = blogServices.obtenerBlog(id);
-        if (!blog.isPresent()) {
-            return ResponseEntity.notFound().build();
-        }
-        blogServices.eliminarBlog(blog.get());
+        Blog blog = blogServices.obtenerBlog(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        blogServices.eliminarBlog(blog);
         return ResponseEntity.noContent().build();
     }
 
