@@ -15,13 +15,17 @@ import jakarta.persistence.ManyToOne;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
+
     private String nombre;
     private String detalle;
-    private Integer precio;
+
+    private Integer valor;
+    private Integer iva;
+    
     private String imagen;
     private Integer stock;
     private Integer criticalStock;
@@ -29,5 +33,18 @@ public class Producto {
     @ManyToOne
     @JoinColumn(name = "tipo_producto_id")
     private TipoProducto tipoProducto;
+
+    public Producto(Long id, String nombre, String detalle, Integer valor, String imagen, Integer stock, Integer criticalStock) {
+        this.id = id;
+        this.nombre = nombre;
+        this.detalle = detalle;
+
+        this.valor = valor;
+        this.iva = (int)(Math.ceil(valor * 0.19 / 10) * 10);
+
+        this.imagen = imagen;
+        this.stock = stock;
+        this.criticalStock = criticalStock;
+    }
     
 }
