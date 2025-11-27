@@ -6,6 +6,7 @@ public class UsuarioMapper {
 
     public UsuarioDTO toDTO(Usuario usuario) {
         return new UsuarioDTO(
+            usuario.getId(),
             usuario.getRun(),
             usuario.getNombre(),
             usuario.getApellidos(),
@@ -19,6 +20,7 @@ public class UsuarioMapper {
 
     public Usuario fromDTO(UsuarioDTO usuarioDTO) {
         return new Usuario(
+            null,
             usuarioDTO.getRun(),
             usuarioDTO.getNombre(),
             usuarioDTO.getApellidos(),

@@ -24,6 +24,7 @@ public class UsuarioServicesImpl implements UsuarioServices {
 
         String claveCifrada = passwordEncoder.encode(usuario.getClave());
         Usuario nuevoUsuario = new Usuario(
+            null,
             usuario.getRun(),
             usuario.getNombre(),
             usuario.getApellidos(),
@@ -36,8 +37,8 @@ public class UsuarioServicesImpl implements UsuarioServices {
     }
 
     @Override
-    public Usuario obtenerRun(String run) {
-        return usuarioRepositories.findById(run)
+    public Usuario obtenerId(Long id) {
+        return usuarioRepositories.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
 
@@ -47,16 +48,16 @@ public class UsuarioServicesImpl implements UsuarioServices {
     }
 
     @Override
-    public void eliminar(String run) {
-        if (!usuarioRepositories.existsById(run)) {
+    public void eliminar(Long id) {
+        if (!usuarioRepositories.existsById(id)) {
             throw new RuntimeException("Usuario no encontrado");
         }
-        usuarioRepositories.deleteById(run);
+        usuarioRepositories.deleteById(id);
     }
 
     @Override
-    public Usuario actualizar(String run, Usuario usuarioActualizado) {
-        Usuario existente = obtenerRun(run);
+    public Usuario actualizar(Long id, Usuario usuarioActualizado) {
+        Usuario existente = obtenerId(id);
         existente.setNombre(usuarioActualizado.getNombre());
         return usuarioRepositories.save(existente);
     }
