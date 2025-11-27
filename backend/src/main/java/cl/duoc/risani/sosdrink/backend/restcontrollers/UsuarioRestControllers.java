@@ -11,7 +11,6 @@ import cl.duoc.risani.sosdrink.backend.entities.Usuario;
 import cl.duoc.risani.sosdrink.backend.services.TipoUsuarioServices;
 import cl.duoc.risani.sosdrink.backend.services.UsuarioServices;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
