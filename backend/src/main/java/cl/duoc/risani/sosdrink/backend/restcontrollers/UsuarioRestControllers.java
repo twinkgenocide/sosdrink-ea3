@@ -43,8 +43,8 @@ public class UsuarioRestControllers {
     }
 
     @GetMapping("/{run}")
-    public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(@PathVariable String run) {
-        Usuario usuario = usuarioservices.obtenerRun(run);
+    public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(@PathVariable Long id) {
+        Usuario usuario = usuarioservices.obtenerId(id);
         UsuarioDTO usuarioDTO = usuarioMapper.toDTO(usuario);
         return ResponseEntity.ok(usuarioDTO);
     }
@@ -58,14 +58,14 @@ public class UsuarioRestControllers {
     }
 
     @DeleteMapping("/{run}")
-    public ResponseEntity<Void> eliminarUsuario(@PathVariable String run) {
-        usuarioservices.eliminar(run);
+    public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
+        usuarioservices.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{run}")
-    public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable String run, @RequestBody UsuarioDTO usuarioDTO) {
-        Usuario usuario = usuarioservices.obtenerRun(run);
+    public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
+        Usuario usuario = usuarioservices.obtenerId(id);
         TipoUsuario tipoUsuario = tipoUsuarioServices.obtenerId(
             usuarioDTO.getTipoUsuarioId()
         );
@@ -76,7 +76,7 @@ public class UsuarioRestControllers {
         usuario.setDireccion(usuarioDTO.getDireccion());
         usuario.setTipoUsuario(tipoUsuario);
 
-        Usuario usuarioGuardado = usuarioservices.actualizar(run, usuario);
+        Usuario usuarioGuardado = usuarioservices.actualizar(id, usuario);
         return ResponseEntity.ok(usuarioMapper.toDTO(usuarioGuardado));
     }
 }

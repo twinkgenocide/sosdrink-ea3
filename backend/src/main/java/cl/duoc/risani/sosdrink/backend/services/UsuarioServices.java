@@ -7,12 +7,12 @@ public interface UsuarioServices {
 
     Usuario crear(Usuario tipoProducto);
 
-    Usuario obtenerRun(String run);
+    Usuario obtenerId(Long id);
 
     List<Usuario> listarTodas();
 
-    void eliminar(String run);
+    void eliminar(Long id);
 
-    Usuario actualizar(String run, Usuario usuarioActualizado);
+    Usuario actualizar(Long id, Usuario usuarioActualizado);
 
 }
