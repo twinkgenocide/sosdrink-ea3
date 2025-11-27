@@ -45,7 +45,7 @@ function BlogMiniContent({ blog, image }) {
                 month: 'short',
                 year: 'numeric'
             })}</time>
-            <Tag href={`/blogs?categoria=${blog.categoriaBlog.id}`} text={blog.categoriaBlog.nombre} />
+            <Tag href={`/blogs?categoria=${blog.categoriaBlogId}`}>{blog.categoriaBlogNombre}</Tag>
         </div>
         <h3>{blog.titulo}</h3>
         <p>{blog.resumen}</p>

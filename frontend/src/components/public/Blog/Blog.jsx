@@ -16,7 +16,7 @@ export function Blog({ data }) {
                 <h3>{data.resumen}</h3>
                 <div className="inline">
                     <DatetimeBD datetime={data.fecha} />
-                    <Tag href={`/blogs?categoria=${data.categoriaBlog.id}`}>{data.categoriaBlog.nombre}</Tag>
+                    <Tag href={`/blogs?categoria=${data.categoriaBlogId}`}>{data.categoriaBlogNombre}</Tag>
                 </div>
             </header>
             <hr />
