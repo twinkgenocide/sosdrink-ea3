@@ -43,20 +43,6 @@ public class UsuarioRestControllers {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<Usuario> intentarIngreso(@RequestBody Usuario usuario) {
-        List<Usuario> allUsuarios = usuarioservices.listarTodas();
-        for (Usuario u : allUsuarios) {
-            if (u.getCorreo().equals(usuario.getCorreo())) {
-                if (u.getClave().equals(usuario.getClave())) {
-                    return ResponseEntity.ok(u);
-                }
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-            }
-        }
-        return ResponseEntity.notFound().build();
-    }
-
     @PutMapping("/{run}")
     public ResponseEntity<Usuario> actualizarUsuario(@PathVariable String run,
             @RequestBody Usuario usuarioActualizado) {
