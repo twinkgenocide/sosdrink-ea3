@@ -28,10 +28,10 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest req) {
 
         authManager.authenticate(
-                new UsernamePasswordAuthenticationToken(req.username(), req.password())
+                new UsernamePasswordAuthenticationToken(req.correo(), req.clave())
         );
 
-        UserDetails user = uds.loadUserByUsername(req.username());
+        UserDetails user = uds.loadUserByUsername(req.correo());
 
         String token = jwtUtils.generateToken(user.getUsername());
 

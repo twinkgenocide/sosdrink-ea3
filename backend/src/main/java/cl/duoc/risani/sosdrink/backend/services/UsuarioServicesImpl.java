@@ -2,6 +2,7 @@ package cl.duoc.risani.sosdrink.backend.services;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import cl.duoc.risani.sosdrink.backend.entities.Usuario;
@@ -14,9 +15,24 @@ public class UsuarioServicesImpl implements UsuarioServices {
     @Autowired
     private UsuarioRepositories usuarioRepositories;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public Usuario crear(Usuario usuario) {
-        return usuarioRepositories.save(usuario);
+        if (usuarioRepositories.existsByCorreo(usuario.getCorreo())) throw new RuntimeException("Usuario ya existe!");
+
+        String claveCifrada = passwordEncoder.encode(usuario.getClave());
+        Usuario nuevoUsuario = new Usuario(
+            usuario.getRun(),
+            usuario.getNombre(),
+            usuario.getApellidos(),
+            usuario.getCorreo(),
+            usuario.getDireccion(),
+            claveCifrada,
+            usuario.getTipoUsuario()
+        );
+        return usuarioRepositories.save(nuevoUsuario);
     }
 
     @Override
