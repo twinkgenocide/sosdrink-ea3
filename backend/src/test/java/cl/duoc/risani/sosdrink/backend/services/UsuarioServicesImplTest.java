@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import cl.duoc.risani.sosdrink.backend.entities.Usuario;
 import cl.duoc.risani.sosdrink.backend.repository.UsuarioRepositories;
@@ -28,6 +29,9 @@ class UsuarioServicesImplTest {
     // Esta instancia no se conectará a la base de datos.
     @Mock
     private UsuarioRepositories usuarioRepositories;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     // @InjectMocks: Crea una instancia de UsuarioServicesImpl e inyecta
     // automáticamente el mock de 'usuarioRepositories' en ella.

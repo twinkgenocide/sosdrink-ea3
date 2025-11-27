@@ -20,15 +20,13 @@ vi.mock('../ProductCatalog/ProductCatalog', () => ({ ProductCatalog: ({ texto })
 import { Product } from './Product'
 
 describe('Product page', () => {
-  const originalFetch = global.fetch
+  const originalFetch = globalThis.fetch
 
   beforeEach(() => {
-    vi.useFakeTimers()
   })
 
   afterEach(() => {
-    vi.useRealTimers()
-    global.fetch = originalFetch
+    globalThis.fetch = originalFetch
     vi.resetAllMocks()
   })
 
@@ -40,36 +38,34 @@ describe('Product page', () => {
       precio: 1234,
       detalle: 'Descripcion del producto',
       imagen: '/uploads/product.png',
-      tipoProducto: { id: 2 }
+      tipoProducto: {
+        id: 1,
+        nombre: 'Prueba'
+      }
     }
 
-    global.fetch = vi.fn(() => Promise.resolve({ ok: true, json: () => Promise.resolve(product) }))
+    globalThis.fetch = vi.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve(product)
+      }
+    ))
 
     const { container } = render(<Product />)
 
-
-    expect(screen.queryByText(product.nombre)).toBeNull()
-
-    vi.runAllTimers()
-
-
     await waitFor(() => expect(screen.getByText(product.nombre)).toBeInTheDocument())
-
 
     const img = container.querySelector('img')
     expect(img).toBeTruthy()
     expect(img.getAttribute('src')).toContain(product.imagen)
 
-
     expect(screen.getByText(`$${product.precio}`)).toBeInTheDocument()
     expect(screen.getByText(product.detalle)).toBeInTheDocument()
 
-
     const addBtn = screen.getByText('Añadir al carrito')
     expect(addBtn).toBeInTheDocument()
-    fireEvent.click(addBtn)
 
-    
+    fireEvent.click(addBtn)
     expect(screen.getByText('Eliminar del carrito')).toBeInTheDocument()
 
     fireEvent.click(screen.getByText('Eliminar del carrito'))

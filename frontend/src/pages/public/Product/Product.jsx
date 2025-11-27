@@ -19,7 +19,7 @@ export function Product() {
             const response = await fetch(url);
             if (response.ok) {
                 const data = await response.json();
-                setTimeout(() => setProduct(data), 2000);
+                setProduct(data)
             }
         }
         fetchData();

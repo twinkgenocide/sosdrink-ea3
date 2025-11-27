@@ -1,6 +1,6 @@
 import React from 'react'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
 // Mock del useNavigate
@@ -19,7 +19,7 @@ vi.mock('../../../util/apipath', () => ({ api_path: (p) => p }))
 import { LoginPage } from './Login'
 
 describe('LoginPage', () => {
-  const originalFetch = global.fetch
+  const originalFetch = globalThis.fetch
   const originalAlert = window.alert
 
   beforeEach(() => {
@@ -28,7 +28,7 @@ describe('LoginPage', () => {
   })
 
   afterEach(() => {
-    global.fetch = originalFetch
+    globalThis.fetch = originalFetch
     window.alert = originalAlert
     vi.resetAllMocks()
   })
@@ -46,6 +46,7 @@ describe('LoginPage', () => {
 
   it('muestra error de validacion cuando el formulario se envia con campos vacios', async () => {
     const user = userEvent.setup()
+    globalThis.fetch = vi.fn()
     render(<LoginPage />)
 
     const submitBtn = screen.getByRole('button', { name: /iniciar sesion/i })
@@ -53,14 +54,14 @@ describe('LoginPage', () => {
 
     //El formulario deberia no enviarse si los campos estan vacios (validacion HTML5)
 
-    expect(global.fetch).not.toHaveBeenCalled()
+    expect(globalThis.fetch).not.toHaveBeenCalled()
   })
 
 
   
   it('redirije a /admin cuando un usuario admin inicia sesion exitosamente', async () => {
     const user = userEvent.setup()
-    global.fetch = vi.fn(() =>
+    globalThis.fetch = vi.fn(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ tipoUsuario: { nombre: 'administrador' } })
@@ -78,7 +79,7 @@ describe('LoginPage', () => {
     await user.click(submitBtn)
 
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith(
+      expect(globalThis.fetch).toHaveBeenCalledWith(
         'api/usuarios/login',
         expect.objectContaining({
           method: 'POST',
@@ -97,7 +98,7 @@ describe('LoginPage', () => {
 
   it('redirije a /productos cuando un usuario regular inicia sesion exitosamente', async () => {
     const user = userEvent.setup()
-    global.fetch = vi.fn(() =>
+    globalThis.fetch = vi.fn(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ tipoUsuario: { nombre: 'usuario' } })
@@ -123,7 +124,7 @@ describe('LoginPage', () => {
 
   it('muestra una alerta cuando el login falla', async () => {
     const user = userEvent.setup()
-    global.fetch = vi.fn(() =>
+    globalThis.fetch = vi.fn(() =>
       Promise.resolve({
         ok: false
       })
