@@ -16,8 +16,12 @@ cd backend
 ./mvnw spring-boot:run
 ```
 
-Requiere base de datos MySQL o MariaDB. 'script.sql' contiene los statements para la inserción de datos. Importante:
-- La base de datos 'sosdrink_db' ya debe existir. `CREATE DATABASE sosdrink_db;`
-- Las tablas son generadas por el aplicativo backend; este debe ejecutarse antes de ejecutar el script.
+Requiere base de datos MySQL o MariaDB. 'script.sql' contiene los statements para la creación de la base de datos e inserción de datos.
 
 **PORTS: Frontend 5173, Backend 8080**
+
+📧 Usuarios y contraseñas de prueba
+
+- camila.gonzalez@gmail.com — Admin123!
+- jorge.torres@gmail.com — Cliente321@
+- felipe.rojas@duoc.cl --- Cliente456#

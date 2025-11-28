@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepo.findByCorreo(correo)
                 .orElseThrow(() -> new UsernameNotFoundException("Usuario con correo '" + correo + "' no encontrado."));
-        var authorities = List.of(new SimpleGrantedAuthority("ROLE_" + usuario.getTipoUsuario().getNombre()));
+        var authorities = List.of(new SimpleGrantedAuthority("ROLE_" + usuario.getTipoUsuario().getRol().toUpperCase()));
         return new org.springframework.security.core.userdetails.User(
                 usuario.getCorreo(),
                 usuario.getClave(),    

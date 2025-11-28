@@ -25,6 +25,7 @@ public class UsuarioMapper {
             usuarioDTO.getNombre(),
             usuarioDTO.getApellidos(),
             usuarioDTO.getCorreo(),
+            null,
             usuarioDTO.getDireccion(),
             null,
             null

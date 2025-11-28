@@ -29,9 +29,10 @@ public class UsuarioServicesImpl implements UsuarioServices {
             usuario.getNombre(),
             usuario.getApellidos(),
             usuario.getCorreo(),
-            usuario.getDireccion(),
             claveCifrada,
-            usuario.getTipoUsuario()
+            usuario.getDireccion(),
+            usuario.getTipoUsuario(),
+            null
         );
         return usuarioRepositories.save(nuevoUsuario);
     }
@@ -41,6 +42,13 @@ public class UsuarioServicesImpl implements UsuarioServices {
         return usuarioRepositories.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
     }
+
+    @Override
+    public Usuario obtenerCorreo(String correo) {
+        return usuarioRepositories.findByCorreo(correo)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+    }
+
 
     @Override
     public List<Usuario> listarTodas() {

@@ -24,7 +24,7 @@ public class BoletaDTO {
     @Value("${empresa.giro}")
     private String empresaGiro;
 
-    private Integer folio;
+    private String folio;
     private String fechaEmision;
 
     private String clienteNombre;

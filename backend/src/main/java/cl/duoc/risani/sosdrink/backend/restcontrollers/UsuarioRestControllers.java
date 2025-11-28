@@ -42,7 +42,7 @@ public class UsuarioRestControllers {
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
-    @GetMapping("/{run}")
+    @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> obtenerUsuarioPorId(@PathVariable Long id) {
         Usuario usuario = usuarioservices.obtenerId(id);
         UsuarioDTO usuarioDTO = usuarioMapper.toDTO(usuario);
@@ -57,13 +57,13 @@ public class UsuarioRestControllers {
         return ResponseEntity.ok(usuarios);
     }
 
-    @DeleteMapping("/{run}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarUsuario(@PathVariable Long id) {
         usuarioservices.eliminar(id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{run}")
+    @PutMapping("/{id}")
     public ResponseEntity<UsuarioDTO> actualizarUsuario(@PathVariable Long id, @RequestBody UsuarioDTO usuarioDTO) {
         Usuario usuario = usuarioservices.obtenerId(id);
         TipoUsuario tipoUsuario = tipoUsuarioServices.obtenerId(

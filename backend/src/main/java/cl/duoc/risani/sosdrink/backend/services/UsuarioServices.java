@@ -9,6 +9,8 @@ public interface UsuarioServices {
 
     Usuario obtenerId(Long id);
 
+    Usuario obtenerCorreo(String correo);
+
     List<Usuario> listarTodas();
 
     void eliminar(Long id);

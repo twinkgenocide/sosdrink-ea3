@@ -20,9 +20,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(
-    // indexación para poder buscar boletas por su folio de manera eficiente
+    // indexación para poder buscar boletas por su folio o RUN del cliente de manera eficiente
     indexes = {
-        @Index(name = "idx_boleta_folio", columnList = "folio")
+        @Index(name = "idx_boleta_folio", columnList = "folio"),
+        @Index(name = "idx_boleta_cliente_run", columnList = "cliente_run"),
     }
 )
 public class Boleta {
@@ -32,13 +33,13 @@ public class Boleta {
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private Integer folio;
+    private String folio;
 
     @Column(nullable = false)
     private LocalDateTime fechaEmision;
 
     @Column(nullable = false)
-    private String clienteRUN;
+    private String clienteRun;
 
     @Column(nullable = false)
     private String clienteNombre;

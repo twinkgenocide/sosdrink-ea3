@@ -17,7 +17,7 @@ public class BoletaMapper {
         boletaDTO.setFechaEmision(boleta.getFechaEmision().format(dateTimeFormatter));
 
         boletaDTO.setClienteNombre(boleta.getClienteNombre());
-        boletaDTO.setClienteRUN(boleta.getClienteRUN());
+        boletaDTO.setClienteRUN(boleta.getClienteRun());
 
         boletaDTO.setSubtotal(boleta.getSubtotal());
         boletaDTO.setIva(boleta.getIva());

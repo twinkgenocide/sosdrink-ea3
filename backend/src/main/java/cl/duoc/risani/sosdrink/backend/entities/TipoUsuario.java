@@ -21,6 +21,7 @@ public class TipoUsuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
+    private String rol;
     private String nombre;
 
     @OneToMany(mappedBy = "tipoUsuario")
@@ -29,7 +30,7 @@ public class TipoUsuario {
 
     @Override
     public String toString() {
-        return "TipoUsuario [id=" + id + ", nombre=" + nombre + "]";
+        return "TipoUsuario [id=" + id + ", nombre=" + nombre + ", rol=" + rol + "]";
     }
 
 }
