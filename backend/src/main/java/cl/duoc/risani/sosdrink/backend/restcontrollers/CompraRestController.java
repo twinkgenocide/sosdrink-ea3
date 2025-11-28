@@ -1,7 +1,6 @@
 package cl.duoc.risani.sosdrink.backend.restcontrollers;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import cl.duoc.risani.sosdrink.backend.dto.BoletaDTO;
@@ -20,6 +18,7 @@ import cl.duoc.risani.sosdrink.backend.entities.Boleta;
 import cl.duoc.risani.sosdrink.backend.entities.Usuario;
 import cl.duoc.risani.sosdrink.backend.security.JwtUtils;
 import cl.duoc.risani.sosdrink.backend.services.BoletaServices;
+import cl.duoc.risani.sosdrink.backend.services.CarritoServices;
 import cl.duoc.risani.sosdrink.backend.services.UsuarioServices;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -35,6 +34,9 @@ public class CompraRestController {
     private BoletaServices boletaServices;
 
     @Autowired
+    private CarritoServices carritoServices;
+
+    @Autowired
     private UsuarioServices usuarioServices;
 
     private BoletaMapper boletaMapper = new BoletaMapper();
@@ -46,16 +48,15 @@ public class CompraRestController {
     public ResponseEntity<BoletaDTO> nuevaCompra(HttpServletRequest request) {
         String header = jwtUtils.getJwtFromRequest(request);
         if (header == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        String correo = jwtUtils.getUsernameFromToken(header.substring(7));
+        String correo = jwtUtils.getUsernameFromToken(header);
 
         try {
             Usuario usuario = usuarioServices.obtenerCorreo(correo);
             Boleta boletaGuardada = boletaServices.saveUsuarioBoleta(usuario);
+            carritoServices.clearCarrito(usuario);
             return ResponseEntity.ok(boletaMapper.toDTO(boletaGuardada));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 
@@ -63,7 +64,7 @@ public class CompraRestController {
     public ResponseEntity<BoletaDTO> buscarBoleta(HttpServletRequest request, @PathVariable String folio) {
         String header = jwtUtils.getJwtFromRequest(request);
         if (header == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        String correo = jwtUtils.getUsernameFromToken(header.substring(7));
+        String correo = jwtUtils.getUsernameFromToken(header);
 
         try {
             Usuario usuario = usuarioServices.obtenerCorreo(correo);

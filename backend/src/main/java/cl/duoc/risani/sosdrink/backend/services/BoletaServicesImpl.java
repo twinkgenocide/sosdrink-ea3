@@ -17,6 +17,7 @@ import cl.duoc.risani.sosdrink.backend.entities.Producto;
 import cl.duoc.risani.sosdrink.backend.entities.Usuario;
 import cl.duoc.risani.sosdrink.backend.repository.BoletaRepository;
 import cl.duoc.risani.sosdrink.backend.repository.FolioGeneratorRepository;
+import jakarta.transaction.Transactional;
 
 @Service
 public class BoletaServicesImpl implements BoletaServices {
@@ -43,6 +44,7 @@ public class BoletaServicesImpl implements BoletaServices {
     }
 
     @Override
+    @Transactional
     public Boleta saveUsuarioBoleta(Usuario usuario) {
         List<ItemCarrito> carrito = usuario.getCarrito();
         if (carrito.size() == 0) throw new IllegalArgumentException("Carrito vacio.");
@@ -76,8 +78,10 @@ public class BoletaServicesImpl implements BoletaServices {
         boleta.setLineasBoleta(lineasBoleta);
 
         return boletaRepository.save(boleta);
+        
     }
     
+    @Transactional
     private String obtenerNuevoFolio() {
         Integer year = Year.now().getValue();
         Optional<FolioGenerator> generatorOptional = folioGeneratorRepository.findByYear(year);

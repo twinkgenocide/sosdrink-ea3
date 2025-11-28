@@ -26,12 +26,12 @@ public class ItemCarrito {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    @ManyToOne(cascade = CascadeType.REMOVE)
+
+    @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JoinColumn(name = "producto_id", nullable = false)
     private Producto producto;
 

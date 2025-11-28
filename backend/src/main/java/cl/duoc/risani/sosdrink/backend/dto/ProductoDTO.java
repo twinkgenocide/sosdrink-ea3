@@ -18,8 +18,7 @@ public class ProductoDTO {
     private Integer iva;
 
     private String imagenUrl;
-    private Integer stock;
-    private boolean critical;
+    private String stockStatus;
 
     private Long tipoProductoId;
     private String tipoProductoNombre;
