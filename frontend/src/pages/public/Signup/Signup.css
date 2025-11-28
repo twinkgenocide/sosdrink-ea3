@@ -1,0 +1,61 @@
+form.signupForm {
+    display: flex;
+    flex-direction: column;
+    background-color: #161616;
+    border: 1px solid #202020;
+    padding: 20pt;
+    border-radius: 6px;
+    max-height: 320pt;
+
+    margin: auto;
+}
+
+form.signupForm .formInternal {
+    display: flex;
+    margin: auto;
+    max-width: 600pt;
+
+    gap: 20pt;
+}
+
+form.signupForm .formInternal>div {
+    display: flex;
+    flex-direction: column;
+    gap: 8pt;
+    height: 100%;
+}
+
+form.signupForm button {
+    margin-top: 25pt;
+    margin-bottom: none;
+
+    background-color: color-mix(in srgb, var(--accent-2), transparent 80%);
+    border: 1px solid var(--accent-2);
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    letter-spacing: 2px;
+    color: var(--accent-2);
+
+    transition: background-color, border-color, color;
+    transition-duration: 200ms;
+
+    &:hover {
+        background-color: color-mix(in srgb, var(--accent-1), transparent 80%);
+        border-color: var(--accent-1);
+        color: var(--accent-1);
+    }
+}
+
+form.signupForm input {
+    background-color: #101010;
+    border: 1px solid #202020;
+    padding: 6px;
+    border-radius: 3px;
+    outline: none;
+    color: #a0a0a0;
+}
+
+form.signupForm label {
+    margin: 0;
+}

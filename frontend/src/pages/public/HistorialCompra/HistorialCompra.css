@@ -1,0 +1,81 @@
+.historialCompra {
+    width: 50%;
+    max-width: 800pt;
+    display: flex;
+    flex-direction: column;
+    gap: 10pt;
+
+    margin: 20pt auto;
+
+    animation: animFadeIn;
+    animation-duration: 1s;
+}
+
+.historialCompra .productNames {
+    min-width: 50%;
+    display: flex;
+    flex-direction: column;
+
+    background-color: #101010;
+    border: 1px solid #202020;
+    padding: 6px 12px;
+
+    & p {
+        text-align: left !important;
+        font-size: 0.85em;
+        color: #a0a0a0;
+    }
+}
+
+.historialCompra .compraHistorica {
+    display: flex;
+    background-color: #181818;
+    border: 1px solid #202020;
+    padding: 10pt;
+    gap: 20pt;
+
+    min-height: 80pt;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+    transition: transform 250ms;
+
+    text-decoration: none;
+    color: unset;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    & p {
+        margin: 0;
+        text-align: center;
+
+        &:first-child {
+            text-align: left;
+        }
+
+        &:last-child {
+            text-align: right;
+        }
+    }
+}
+
+.historialCompra .hcont {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.historialCompra .vcont {
+    display: flex;
+    flex-direction: column;
+    gap: 6pt;
+    margin-block: auto;
+
+    & :first-child {
+        font-size: 1.12em;
+        font-weight: 600;
+    }
+}

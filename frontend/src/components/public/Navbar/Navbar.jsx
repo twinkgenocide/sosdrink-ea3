@@ -24,7 +24,7 @@ export function Navbar() {
                     <li><Link to="/blogs" aria-label="Blogs">Blogs</Link></li>
                     <li><Link to="/nosotros" aria-label="Nosotros">Nosotros</Link></li>
                     <li><Link to="/contacto" aria-label="Contacto">Contacto</Link></li>
-                    {loggedIn ? <></> : <li><Link to="/login" aria-label="Login">Ingresa</Link></li>}
+                    {loggedIn ? <li><Link to="/compras" aria-label="Compras">Compras</Link></li> : <li><Link to="/login" aria-label="Login">Ingresa</Link></li>}
                 </ul>
                 <div className="navbar-buttons">
                     {loggedIn ? <CartIcon /> : <></>}

@@ -11,6 +11,8 @@ import { Saludo } from "../components/admin/Saludo.jsx"
 import { AdminUsers } from "../pages/admin/Usuarios"
 import { AdminProductos } from "../pages/admin/Productos"
 import { CarritoPage } from "../pages/public/Carrito/CarritoPage.jsx"
+import { HistorialCompra } from "../pages/public/HistorialCompra/HistorialCompra.jsx"
+import { Signup } from "../pages/public/Signup/Signup.jsx"
 
 export const router = createBrowserRouter([
   {
@@ -38,11 +40,19 @@ export const router = createBrowserRouter([
         element: <LoginPage />
       },
       {
+        path: 'signup',
+        element: <Signup />
+      },
+      {
         path: 'carrito',
         element: <CarritoPage />
       },
       {
-        path: 'boleta/:folio',
+        path: '/compras',
+        element: <HistorialCompra />
+      },
+      {
+        path: 'compras/:folio',
         element: <BoletaPage />
       }
     ]

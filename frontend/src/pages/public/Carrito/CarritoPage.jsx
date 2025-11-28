@@ -26,7 +26,7 @@ export function CarritoPage() {
         if (result.ok) {
             const data = await result.json();
             const folio = data.folio;
-            navigate(`/boleta/${folio}`);
+            navigate(`/compras/${folio}`);
         }
     }
 
