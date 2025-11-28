@@ -1,8 +1,8 @@
 import PlusIcon from "./svg/plus.svg?react"
 import MinusIcon from "./svg/minus.svg?react"
-import CrossIcon from "./svg/cross.svg?react"
 import "./CartButtons.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { addToCarrito, removeFromCarrito, isInCarrito } from "../../../../util/carrito"
 
 export function CartButtonPlus({ productId, onClick }) {
     return <button className='cart-btn plus' onClick={onClick} aria-label='Agregar al carrito'><PlusIcon /></button>
@@ -17,10 +17,21 @@ export function CartButtonCross({ productId, onClick }) {
 }
 
 export function CartButtonDummy({ productId }) {
-    let [positive, setPositive] = useState(true);
+    let [positive, setPositive] = useState(!isInCarrito(productId));
+
+    const onClick = () => {
+        if (isInCarrito(productId)) {
+            removeFromCarrito(productId);
+            setPositive(true);
+        } else {
+            addToCarrito(productId);
+            setPositive(false);
+        }
+    }
+
     if (positive) {
-        return <CartButtonPlus onClick={() => setPositive(false)} />
+        return <CartButtonPlus onClick={onClick} />
     } else {
-        return <CartButtonCross onClick={() => setPositive(true)} />
+        return <CartButtonCross onClick={onClick} />
     }
 }

@@ -18,7 +18,7 @@ import cl.duoc.risani.sosdrink.backend.services.UsuarioServices;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {

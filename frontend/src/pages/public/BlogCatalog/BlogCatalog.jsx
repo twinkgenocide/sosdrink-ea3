@@ -31,7 +31,7 @@ export function BlogCatalog({ categoria, vertical, skip, texto }) {
                 setTimeout(() => {
                     setBlogs(data)
                     if (categoria && data.length > 0) {
-                        const nombreCategoria = data[0].categoriaBlog.nombre;
+                        const nombreCategoria = data[0].categoriaBlogNombre
                         setTituloDefault(`Tag: "${nombreCategoria}"`);
                     }
                 }, 2000)

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { api_path } from "../../../util/apipath";
 
 import "./Login.css"
+import { isLoggedIn, login } from "../../../util/session";
 
 export function LoginPage() {
     const navigate = useNavigate();
@@ -12,19 +13,10 @@ export function LoginPage() {
         if (form.checkValidity()) {
             const data = Object.fromEntries(new FormData(form).entries());
             const sendRequest = async () => {
-                const response = await fetch(api_path('api/usuarios/login'), {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                })
+                await login(data.correo, data.clave);
 
-                if (response.ok) {
-                    const data = await response.json();
-                    if (data.tipoUsuario.nombre == 'administrador') {
-                        navigate('/admin');
-                    } else {
-                        navigate('/productos')
-                    }
+                if (isLoggedIn()) {
+                    navigate("/");
                 } else {
                     alert('Usuario o contraseña incorrecta!');
                 }

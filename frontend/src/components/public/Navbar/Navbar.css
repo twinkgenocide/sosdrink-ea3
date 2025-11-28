@@ -1,6 +1,7 @@
 /* core */
 
 nav.navbar {
+    position: relative;
     background-color: var(--background-alt);
     border-bottom: 2px solid var(--border-neutral);
 }
@@ -13,6 +14,14 @@ nav.navbar>div {
 
 nav.navbar hr {
     color: var(--accent-1);
+}
+
+nav.navbar .navbar-buttons {
+    position: absolute;
+    display: flex;
+    bottom: 0;
+    right: 48px;
+    height: 50px;
 }
 
 /* links */

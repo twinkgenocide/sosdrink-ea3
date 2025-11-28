@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,7 +40,8 @@ public class CompraRestController {
     @Autowired
     private UsuarioServices usuarioServices;
 
-    private BoletaMapper boletaMapper = new BoletaMapper();
+    @Autowired
+    private BoletaMapper boletaMapper;
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -70,9 +72,9 @@ public class CompraRestController {
             Usuario usuario = usuarioServices.obtenerCorreo(correo);
             Boleta boleta = boletaServices
                 .findByFolioAndClienteRUN(folio, usuario.getRun())
-                .orElseThrow(() -> new RuntimeException("Boleta no encontrada"));
+                .orElseThrow(() -> new NotFoundException());
             return ResponseEntity.ok(boletaMapper.toDTO(boleta));
-        } catch (RuntimeException e) {
+        } catch (NotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }

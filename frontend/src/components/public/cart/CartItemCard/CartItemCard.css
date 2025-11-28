@@ -1,0 +1,35 @@
+.cartItemCard {
+    position: relative;
+    display: flex;
+
+    background-color: #121212;
+    border: 1px solid #202020;
+    padding: 12px;
+    border-radius: 6px;
+}
+
+.cartItemCard img {
+    height: 150px;
+}
+
+.cartItemCard .detalles {
+    padding: 0 30pt 0 16px;
+    margin-right: auto;
+}
+
+.cartItemCard .meta {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 16px;
+
+    &>* {
+        margin: 0;
+        margin-left: auto;
+        margin-bottom: 8px;
+    }
+
+    & h1 {
+        font-size: 1.8em;
+    }
+}

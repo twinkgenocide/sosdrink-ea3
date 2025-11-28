@@ -1,0 +1,41 @@
+@keyframes carritoAnim {
+    from {
+        transform: translateY(-500pt);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.carrito-container {
+    padding: 12px;
+    margin-inline: auto;
+    overflow: hidden;
+}
+
+.carrito-container>div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    animation: carritoAnim;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+
+    overflow: hidden;
+
+    &>h2,
+    &>p {
+        text-align: center;
+    }
+}
+
+.carrito-container>div>.neon-btn {
+    padding: 10pt;
+    font-size: 1.5em;
+    letter-spacing: 5pt;
+    word-spacing: 5pt;
+    min-width: 50vw;
+}

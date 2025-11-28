@@ -1,0 +1,38 @@
+#cart-button {
+    position: relative;
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-block: auto;
+
+    transition: transform, box-shadow, background-color;
+    transition-duration: 200ms;
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: color-mix(in srgb, greenyellow, transparent 80%);
+        box-shadow: 0 0 5px color-mix(in srgb, greenyellow, transparent 80%);
+        transform: scale(1.1);
+    }
+}
+
+#cart-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: blueviolet;
+    transition: background-color 200ms;
+
+    -webkit-mask: url('./cart.svg') no-repeat center;
+    mask: url('./cart.svg') no-repeat center;
+    -webkit-mask-size: contain !important;
+    mask-size: contain !important;
+
+    z-index: 0;
+}
+
+#cart-button:hover::before {
+    background-color: greenyellow;
+}

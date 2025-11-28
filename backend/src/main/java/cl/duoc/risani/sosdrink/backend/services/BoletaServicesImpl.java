@@ -17,6 +17,7 @@ import cl.duoc.risani.sosdrink.backend.entities.Producto;
 import cl.duoc.risani.sosdrink.backend.entities.Usuario;
 import cl.duoc.risani.sosdrink.backend.repository.BoletaRepository;
 import cl.duoc.risani.sosdrink.backend.repository.FolioGeneratorRepository;
+import cl.duoc.risani.sosdrink.backend.repository.LineaBoletaRepository;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -24,6 +25,9 @@ public class BoletaServicesImpl implements BoletaServices {
 
     @Autowired
     private BoletaRepository boletaRepository;
+
+    @Autowired
+    private LineaBoletaRepository lineaBoletaRepository;
 
     @Autowired
     private FolioGeneratorRepository folioGeneratorRepository;
@@ -60,7 +64,7 @@ public class BoletaServicesImpl implements BoletaServices {
 
             LineaBoleta linea = new LineaBoleta();
             linea.setCantidad(item.getCantidad());
-            linea.setDetalle(producto.getDetalle());
+            linea.setDetalle(producto.getNombre());
             linea.setValorUnitario(producto.getValor());
             linea.setIvaUnitario(producto.getIva());
 
@@ -75,9 +79,16 @@ public class BoletaServicesImpl implements BoletaServices {
         boleta.setClienteNombre(usuario.getNombre() + " " + usuario.getApellidos());
         boleta.setSubtotal(subtotal);
         boleta.setIva(iva);
-        boleta.setLineasBoleta(lineasBoleta);
+        boleta.setLineasBoleta(new ArrayList<>());
 
-        return boletaRepository.save(boleta);
+        Boleta boletaGuardada = boletaRepository.save(boleta);
+
+        for (LineaBoleta linea : lineasBoleta) {
+            linea.setBoleta(boletaGuardada);
+            lineaBoletaRepository.save(linea);
+        }
+
+        return boletaGuardada;
         
     }
     

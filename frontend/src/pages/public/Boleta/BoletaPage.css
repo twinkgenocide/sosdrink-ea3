@@ -1,0 +1,128 @@
+.boleta-container {
+    display: flex;
+    width: 100%;
+    padding: 20pt;
+}
+
+.boleta {
+    position: relative;
+    max-width: 800pt;
+    width: 50%;
+    background-color: #121212;
+    border: 1px solid #202020;
+    padding: 20pt;
+    border-radius: 6px;
+    margin-inline: auto;
+}
+
+.boleta .meta {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    &>* {
+        height: fit-content;
+    }
+}
+
+.boleta #boleta-folio {
+    margin: 0;
+    padding: 5px 8px;
+
+    background-color: #181818;
+    border-radius: 3px;
+    border: 1px solid #202020;
+
+    font-weight: normal;
+}
+
+.boleta #boleta-fecha {
+    margin: auto 0;
+}
+
+.boleta .split {
+    display: flex;
+    gap: 12px;
+    justify-content: space-between;
+    padding: 12px 0;
+}
+
+.boleta .empresa,
+.boleta .cliente {
+    background-color: #181818;
+    border-radius: 3px;
+    border: 1px solid #202020;
+    padding: 0 12px;
+    width: 100%;
+
+    & h1 {
+        margin: 8px 0;
+        font-size: 1.5em;
+    }
+}
+
+.boleta .cliente {
+    text-align: right;
+}
+
+.boleta .empresa .giro {
+    font-size: 0.9em;
+    color: #a0a0a0;
+}
+
+.boleta .tabla {
+    width: 100%;
+    padding: 12px;
+    background-color: #181818;
+    border-radius: 3px;
+    border: 1px solid #202020;
+    border-collapse: collapse;
+}
+
+.boleta .tabla th,
+.boleta .tabla td {
+    &:first-child {
+        text-align: left;
+    }
+
+    text-align: right;
+    border: 1px solid #202020;
+    padding: 2px 5px;
+
+    pointer-events: none;
+
+    font-weight: normal;
+}
+
+.boleta .tabla td {
+    font-size: 0.9em;
+    color: #a0a0a0;
+    background-color: #141414;
+}
+
+.boleta .sumatoria {
+    display: flex;
+    justify-content: space-between;
+
+    & h4 {
+        margin: 12px 0;
+        font-weight: 500;
+
+        &:first-child {
+            font-size: 1.1rem;
+        }
+
+        &:last-child {
+            font-size: 1.6rem;
+        }
+    }
+}
+
+.boleta .iva-cont {
+    text-align: right;
+
+    & p {
+        margin: 0;
+        color: #a0a0a0;
+    }
+}

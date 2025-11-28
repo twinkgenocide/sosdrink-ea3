@@ -49,8 +49,6 @@ function ProductMiniContent({ product, image, showButton }) {
         button = <CartButtonDummy productId={product.id} />
     }
 
-    console.log(product);
-
     return <div className="content">
         <img src={image} />
         <h1 className="name">{product.nombre}</h1>

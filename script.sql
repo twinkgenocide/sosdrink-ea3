@@ -138,27 +138,4 @@ INSERT INTO usuario (correo, clave, run, nombre, apellidos, direccion, tipo_usua
 ('jorge.torres@gmail.com', '$2a$10$LnUrRKjx.EfskqElU60HBugrCHLssTdEh1zs1duk0E.PF5mPxkY5q', '7.654.321-0', 'Jorge', 'Torres Fernández', 'Pasaje Los Pinos 45, Depto. 5', 2),
 ('felipe.rojas@duoc.cl', '$2a$10$Q7SnAS7KPK0RUNvzdTrfKuE4Xnxjm3x8XhAhrM/5AszdRiP28uKIW', '9.876.543-2', 'Felipe', 'Rojas Martínez', 'Calle Quillota 567, Casa B', 2);
 
-INSERT INTO boleta (cliente_nombre, cliente_run, fecha_emision, folio, iva, subtotal) VALUES
-('Jorge Torres Fernández', '7.654.321-0', '2025-11-28 10:15:00', '2025-00001', 2080, 19970),
-('Jorge Torres Fernández', '7.654.321-0', '2025-11-28 11:00:00', '2025-00002', 8250, 43470);
-
-INSERT INTO boleta (cliente_nombre, cliente_run, fecha_emision, folio, iva, subtotal) 
-VALUES 
-('Felipe Rojas Martínez', '9.876.543-2', '2025-11-28 14:00:00', '2025-00003', 5130, 26970);
-
-INSERT INTO linea_boleta (cantidad, detalle, iva_unitario, valor_unitario, boleta_id) VALUES
-(2, 'Pisco Mistral 35° 750ml', 1700, 8990, 1),
-(1, 'Cerveza Artesanal Kuntsmann 330ml', 380, 1990, 1);
-
-INSERT INTO linea_boleta (cantidad, detalle, iva_unitario, valor_unitario, boleta_id) VALUES
-(1, 'Vino Tinto Casillero del Diablo Cabernet Sauvignon 750ml', 1230, 6490, 2),
-(1, 'Tequila José Cuervo Especial 700ml', 2280, 11990, 2),
-(1, 'Whisky Johnnie Walker Black Label 750ml', 4740, 24990, 2);
-
-INSERT INTO linea_boleta (cantidad, detalle, iva_unitario, valor_unitario, boleta_id) 
-VALUES
-(1, 'Ron Bacardi Carta Blanca 750ml', 2470, 12990, 3),
-(2, 'Vino Blanco Concha y Toro Sauvignon Blanc 750ml', 1330, 6990, 3);
-
-
 COMMIT;
