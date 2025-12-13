@@ -1,20 +1,24 @@
 import { NeonButton } from "./Buttons";
 import "./NumberSpinner.css";
 
-export function NumberSpinner({ value, setValue, min = 1, max = 10 }) {
-    const increment = () => setValue((v) => Math.min(max, v + 1));
-    const decrement = () => setValue((v) => Math.max(min, v - 1));
+export function NumberSpinner({ value, setValue, min = 1, max = 10, disabled = false }) {
+    const increment = () => {
+        if (disabled) return;
+        setValue(Math.min(max, value + 1));
+    }
+    const decrement = () => {
+        if (disabled) return;
+        setValue(Math.max(min, value - 1));
+    }
 
-    return <div className="num-spinner">
+    return <div className={`num-spinner ${disabled ? 'disabled' : ''}`}>
         <NeonButton onClick={decrement}>-</NeonButton>
         <input
             type="number"
             value={value}
             min={min}
             max={max}
-            onChange={(e) => setValue(
-                Math.min(Math.max(Number(e.target.value), min), max)
-            )}
+            disabled={true}
         />
         <NeonButton onClick={increment}>+</NeonButton>
     </div>

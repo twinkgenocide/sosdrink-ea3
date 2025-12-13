@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api_path } from "../../../util/apipath";
 
 import "./Login.css"
@@ -38,6 +38,7 @@ export function LoginPage() {
             <input type="password" id="clave" name="clave" required />
             <br />
             <button type="submit" className="neon-btn" onClick={onButtonSubmit}>INICIAR SESION</button>
+            <Link className="signup-link" to="/signup">Crear cuenta</Link>
         </form>
     </div>
 }

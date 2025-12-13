@@ -15,7 +15,11 @@ export async function login(email, password) {
     localStorage.setItem('authToken', data.token);
 }
 
-export async function logoff() {
+export function setToken(token) {
+    localStorage.setItem('authToken', token);
+}
+
+export function logoff() {
     localStorage.removeItem('authToken');
 }
 

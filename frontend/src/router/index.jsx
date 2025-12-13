@@ -13,12 +13,17 @@ import { AdminProductos } from "../pages/admin/Productos"
 import { CarritoPage } from "../pages/public/Carrito/CarritoPage.jsx"
 import { HistorialCompra } from "../pages/public/HistorialCompra/HistorialCompra.jsx"
 import { Signup } from "../pages/public/Signup/Signup.jsx"
+import { HomePage } from "../pages/public/HomePage/HomePage.jsx"
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <LayoutPublic />,
     children: [
+      {
+        index: true,
+        element: <HomePage />
+      },
       {
         path: 'blogs',
         element: <BlogCatalogPage />

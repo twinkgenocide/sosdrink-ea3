@@ -132,10 +132,10 @@ INSERT INTO tipo_usuario (rol, nombre) VALUES
 ('VENDOR', 'Vendedor');
 
 INSERT INTO usuario (correo, clave, run, nombre, apellidos, direccion, tipo_usuario_id) VALUES
-('camila.gonzalez@gmail.com', '$2a$10$nAuLy9ZUBDLLk/iGkBA2De3Cm8e8CQWoway1ZgiucAgLAojm1VD72', '12.345.678-9', 'Camila', 'González Pérez', 'Av. Providencia 1234, Depto. 12', 1),
-('mariajose.soto@profesor.duoc.cl', '$2a$10$yPBZXtgJVZdfOUe/LZOSf.0thju8GA3atzRZWb8oa33yR4bykV2WC', '15.432.109-7', 'María José', 'Soto López', 'Calle O’Higgins 890, Oficina 3', 3),
-('valentina.vargas@duoc.cl', '$2a$10$p5Nx0h3nYQQamDnH52YkYu4kAimgf1vNlrrjwyKHGXzkbSYV8VeQO', '18.765.432-1', 'Valentina', 'Vargas Muñoz', 'Av. Libertad 234, Local 2', 3),
-('jorge.torres@gmail.com', '$2a$10$LnUrRKjx.EfskqElU60HBugrCHLssTdEh1zs1duk0E.PF5mPxkY5q', '7.654.321-0', 'Jorge', 'Torres Fernández', 'Pasaje Los Pinos 45, Depto. 5', 2),
-('felipe.rojas@duoc.cl', '$2a$10$Q7SnAS7KPK0RUNvzdTrfKuE4Xnxjm3x8XhAhrM/5AszdRiP28uKIW', '9.876.543-2', 'Felipe', 'Rojas Martínez', 'Calle Quillota 567, Casa B', 2);
+('camila.gonzalez@gmail.com', '$2a$10$nAuLy9ZUBDLLk/iGkBA2De3Cm8e8CQWoway1ZgiucAgLAojm1VD72', '12345678-9', 'Camila', 'González Pérez', 'Av. Providencia 1234, Depto. 12', 1),
+('mariajose.soto@profesor.duoc.cl', '$2a$10$yPBZXtgJVZdfOUe/LZOSf.0thju8GA3atzRZWb8oa33yR4bykV2WC', '15432109-7', 'María José', 'Soto López', 'Calle O’Higgins 890, Oficina 3', 3),
+('valentina.vargas@duoc.cl', '$2a$10$p5Nx0h3nYQQamDnH52YkYu4kAimgf1vNlrrjwyKHGXzkbSYV8VeQO', '18765432-1', 'Valentina', 'Vargas Muñoz', 'Av. Libertad 234, Local 2', 3),
+('jorge.torres@gmail.com', '$2a$10$LnUrRKjx.EfskqElU60HBugrCHLssTdEh1zs1duk0E.PF5mPxkY5q', '7654321-0', 'Jorge', 'Torres Fernández', 'Pasaje Los Pinos 45, Depto. 5', 2),
+('felipe.rojas@duoc.cl', '$2a$10$Q7SnAS7KPK0RUNvzdTrfKuE4Xnxjm3x8XhAhrM/5AszdRiP28uKIW', '9876543-2', 'Felipe', 'Rojas Martínez', 'Calle Quillota 567, Casa B', 2);
 
 COMMIT;

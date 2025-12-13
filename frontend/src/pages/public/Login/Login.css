@@ -30,3 +30,27 @@ div.login-container form input {
     margin-block-start: 5pt;
     margin-block-end: 15pt;
 }
+
+div.login-container .signup-link {
+    text-decoration: none;
+    padding-block: 10pt 4pt;
+    padding-inline: 4pt;
+    margin-block: 2pt;
+    margin-inline: auto;
+
+    border-bottom: 1px solid var(--accent-2);
+    text-align: center;
+
+    width: 40%;
+    color: var(--accent-2);
+
+    transition: width, color, border-bottom-color, text-shadow;
+    transition-duration: 300ms;
+
+    &:hover {
+        width: 100%;
+        color: var(--accent-1);
+        border-bottom-color: var(--accent-1);
+        text-shadow: 0 0 5px var(--accent-1);
+    }
+}

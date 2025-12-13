@@ -23,6 +23,9 @@ div.num-spinner input {
     font-size: 1.1em;
     text-align: center;
 
+    transition: color, border-color, background-color;
+    transition-duration: 150ms;
+
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
         -webkit-appearance: none;
@@ -36,6 +39,19 @@ div.num-spinner button {
     width: 30pt;
     font-weight: 700;
     font-size: 1.3em;
+}
+
+div.num-spinner.disabled .neon-btn {
+    border-color: grey;
+    color: grey;
+    background-color: color-mix(in srgb, grey, transparent 80%);
+    cursor: unset;
+}
+
+div.num-spinner.disabled input {
+    border-color: grey;
+    color: grey;
+    background-color: color-mix(in srgb, grey, transparent 80%);
 }
 
 div.num-spinner> :first-child {

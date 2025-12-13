@@ -23,39 +23,32 @@ public class UsuarioDTO {
     private String tipoUsuarioNombre;
 
     public boolean isValidFull() {
-        return (
-            this.isClaveValid()
-            && this.isValidInfo()
-            && this.isClaveValid()
-            && (this.direccion != null && !this.direccion.trim().isEmpty())
-            && (this.tipoUsuarioId != null)
-        );
+        return (this.isClaveValid()
+                && this.isValidInfo()
+                && this.isClaveValid()
+                && (this.direccion != null && !this.direccion.trim().isEmpty())
+                && (this.tipoUsuarioId != null));
     }
 
     public boolean isValidSignup() {
-        return (
-            this.isValidBasic()
-            && this.isValidInfo()
-            && this.isClaveValid()
-        );
+        return (this.isValidBasic()
+                && this.isValidInfo()
+                && this.isClaveValid());
     }
 
     public boolean isValidInfo() {
-        return (
-            this.nombre != null && !this.nombre.trim().isEmpty()
-            && this.apellidos != null && !this.apellidos.trim().isEmpty()
-        );
+        return (this.nombre != null && !this.nombre.trim().isEmpty()
+                && this.apellidos != null && !this.apellidos.trim().isEmpty());
     }
 
     public boolean isValidBasic() {
-        return (
-            this.isRunValid() == 0
-            && this.isCorreoValid()
-        );
+        return (this.isRunValid() == 0
+                && this.isCorreoValid());
     }
 
     public boolean isCorreoValid() {
-        if (this.correo == null) return false;
+        if (this.correo == null)
+            return false;
         Pattern pattern = Pattern.compile("^(.+)@(.+)$");
         Matcher matcher = pattern.matcher(this.correo);
         return matcher.matches();
@@ -66,12 +59,16 @@ public class UsuarioDTO {
     }
 
     public int isRunValid() {
-        if (this.run == null) return 1;
+        if (this.run == null)
+            return 1;
+
+        this.run = this.run.replace(".", "");
 
         // Validar formato XX.XXX.XXX-X
         Pattern pattern = Pattern.compile("^\\d{7,8}-[\\dKk]$");
         Matcher matcher = pattern.matcher(this.run);
-        if (!matcher.matches()) return 2;
+        if (!matcher.matches())
+            return 2;
 
         // Validar dígito verificador
         String runBase = this.run.split("-")[0];
@@ -89,7 +86,8 @@ public class UsuarioDTO {
         int d = 11 - (suma % 11);
         String dv = (d == 10) ? "K" : String.valueOf(d % 11);
 
-        if (!runDv.equals(dv)) return 3;
+        if (!runDv.equals(dv))
+            return 3;
 
         return 0;
     }

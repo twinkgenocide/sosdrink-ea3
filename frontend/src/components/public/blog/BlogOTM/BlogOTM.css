@@ -1,0 +1,79 @@
+div.blog-otm-container {
+    width: 650pt;
+    min-height: 244px;
+    height: fit-content;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+a.blog-otm {
+    text-decoration: none;
+    color: unset;
+    display: flex;
+
+    background-color: transparent;
+    border-radius: 15px;
+    border: 1px solid transparent;
+
+    gap: 12pt;
+    padding: 6pt;
+
+    &:hover {
+        background-color: #202020;
+        border-color: #404040;
+        transform: scale(1.05);
+    }
+
+    transition: transform,
+    background-color,
+    border-color;
+    transition-duration: 250ms;
+
+    animation: animFadeIn;
+    animation-duration: 1s;
+}
+
+a.blog-otm figure {
+    width: 250pt;
+    margin: 0;
+    border-radius: 10px;
+}
+
+a.blog-otm img {
+    height: 100%;
+    width: 100%;
+}
+
+a.blog-otm>div {
+    display: flex;
+    flex-direction: column;
+    gap: 10pt;
+    margin-block: auto;
+}
+
+a.blog-otm h1 {
+    font-size: 1.6em;
+    margin: 0;
+}
+
+a.blog-otm h3 {
+    font-size: 1.0em;
+    font-weight: 400;
+    margin: 0;
+}
+
+a.blog-otm p {
+    font-size: 0.88em;
+    color: #a0a0a0;
+    margin: 0;
+}
+
+a.blog-otm div.meta {
+    display: flex;
+    align-content: center;
+    gap: 8pt;
+    font-size: 0.85em;
+    color: #a0a0a0;
+}

@@ -1,3 +1,10 @@
+div.signup-container {
+    display: flex;
+    flex-direction: column;
+    padding: 40pt 20pt;
+    width: 100%;
+}
+
 form.signupForm {
     display: flex;
     flex-direction: column;
@@ -7,7 +14,7 @@ form.signupForm {
     border-radius: 6px;
     max-height: 320pt;
 
-    margin: auto;
+    margin-inline: auto;
 }
 
 form.signupForm .formInternal {
@@ -40,10 +47,19 @@ form.signupForm button {
     transition: background-color, border-color, color;
     transition-duration: 200ms;
 
-    &:hover {
+    cursor: pointer;
+
+    &:hover:not(.disabled) {
         background-color: color-mix(in srgb, var(--accent-1), transparent 80%);
         border-color: var(--accent-1);
         color: var(--accent-1);
+    }
+
+    &.disabled {
+        cursor: unset;
+        background-color: color-mix(in srgb, grey, transparent 80%);
+        border-color: grey;
+        color: grey;
     }
 }
 
@@ -58,4 +74,49 @@ form.signupForm input {
 
 form.signupForm label {
     margin: 0;
+}
+
+@keyframes errorAnimation {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(4px);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    75% {
+        transform: translateX(-4px)
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+div.signup-container>h1 {
+    text-align: center;
+    padding-block: 0 20pt;
+    margin: 0;
+}
+
+p.signup-error {
+    max-width: 600pt;
+    min-height: 1lh;
+    margin-inline: auto;
+    text-align: center;
+
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    color: var(--accent-3);
+
+    &.shake {
+        animation: errorAnimation 120ms;
+        animation-iteration-count: 3;
+        animation-timing-function: ease-in-out;
+    }
 }

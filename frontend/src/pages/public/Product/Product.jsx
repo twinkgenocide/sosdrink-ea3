@@ -7,6 +7,7 @@ import "./Product.css"
 import { NeonButton } from "../../../components/public/Input/Buttons";
 import { NumberSpinner } from "../../../components/public/Input/NumberSpinner";
 import { ProductCatalog } from "../ProductCatalog/ProductCatalog";
+import { addToCarrito, findInCarrito, isInCarrito, removeFromCarrito, setCantidad } from "../../../util/carrito";
 
 export function Product() {
     const params = useParams();
@@ -42,20 +43,47 @@ function ProductBody({ product }) {
     let [inCarrito, setInCarrito] = useState(false);
     let [value, setValue] = useState(0);
 
+    useEffect(() => {
+        const item = findInCarrito(product.id);
+        if (item) {
+            setInCarrito(true);
+            setValue(item.cantidad)
+        } else {
+            setInCarrito(false);
+        }
+    }, [])
+
+    const setCant = (cantidad) => {
+        setValue(cantidad);
+        setCantidad(product.id, cantidad);
+    }
+
+    const addToCart = () => {
+        addToCarrito(product.id);
+        setInCarrito(isInCarrito(product.id));
+        setValue(1);
+    }
+
+    const removeFromCart = () => {
+        removeFromCarrito(product.id);
+        setInCarrito(isInCarrito(product.id));
+        setValue(0);
+    }
+
     return <article className="product">
         <img src={api_path(product.imagen)} />
         <div className="product-card">
             <div className="product-info">
                 <h2 className="product-name">{product.nombre}
-                    <span className="product-price">{`$${product.precio}`}</span>
+                    <span className="product-price">{`$${product.valor + product.iva}`}</span>
                 </h2>
                 <p className="product-details">{product.detalle}</p>
             </div>
             <div className="product-actions">
-                <NumberSpinner value={value} setValue={setValue} />
+                <NumberSpinner value={value} setValue={setCant} disabled={!inCarrito} />
                 {
-                    !inCarrito ? <NeonButton onClick={() => setInCarrito(true)}>Añadir al carrito</NeonButton>
-                        : <NeonButton negative={true} onClick={() => setInCarrito(false)}>Eliminar del carrito</NeonButton>
+                    !inCarrito ? <NeonButton onClick={addToCart}>Añadir al carrito</NeonButton>
+                        : <NeonButton negative={true} onClick={removeFromCart}>Eliminar del carrito</NeonButton>
                 }
             </div>
         </div>

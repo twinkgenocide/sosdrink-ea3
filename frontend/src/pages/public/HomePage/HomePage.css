@@ -1,0 +1,10 @@
+div.home-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15pt;
+
+    animation: animFadeIn;
+    animation-duration: 1s;
+}
