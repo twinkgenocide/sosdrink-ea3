@@ -54,9 +54,9 @@ export function BoletaPage() {
                     </tr>
                     {
                         boleta.lineas.map((i) => <tr>
-                            <td>{i.detalle}</td>
-                            <td>${i.valorUnitario}</td>
-                            <td>${i.ivaUnitario}</td>
+                            <td>{`${i.detalle} x${i.cantidad}`}</td>
+                            <td>${i.valorUnitario * i.cantidad}</td>
+                            <td>${i.ivaUnitario * i.cantidad}</td>
                         </tr>)
                     }
                 </table>

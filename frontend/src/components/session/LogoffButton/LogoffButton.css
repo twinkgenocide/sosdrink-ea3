@@ -1,0 +1,24 @@
+button#logoff-button {
+    border: none;
+    background-color: transparent;
+    color: var(--accent-2);
+    padding-inline-start: 6pt;
+    margin: 6pt;
+
+    text-transform: uppercase;
+    font-size: 1.1em;
+
+    border-radius: 8px;
+    cursor: pointer;
+
+    transition: padding, color, letter-spacing, text-shadow, transform;
+    transition-duration: 200ms;
+
+    &:hover {
+        padding-inline-start: 12pt;
+        color: var(--accent-1);
+        text-shadow: 0 0 5px var(--accent-1);
+        letter-spacing: 2px;
+        transform: scale(1.05);
+    }
+}

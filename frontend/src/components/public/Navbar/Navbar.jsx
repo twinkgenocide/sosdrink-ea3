@@ -3,6 +3,7 @@ import "./Navbar.css"
 import { CartIcon } from "../cart/CartIcon/CartIcon";
 import { isLoggedIn } from "../../../util/session";
 import { useEffect, useState } from "react";
+import { LogoffButton } from "../../session/LogoffButton/LogoffButton";
 
 export function Navbar() {
     const [loggedIn, setLoggedIn] = useState(isLoggedIn());
@@ -28,6 +29,7 @@ export function Navbar() {
                 </ul>
                 <div className="navbar-buttons">
                     {loggedIn ? <CartIcon /> : <></>}
+                    {loggedIn ? <LogoffButton /> : <></>}
                 </div>
                 <hr />
             </div>
